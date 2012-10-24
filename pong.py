@@ -18,15 +18,21 @@ class Pong:
         self.screen = pygame.display.get_surface()
         self._running = True
         
-        self.player1 = Paddle(0,0,20,100)
-        self.player2 = Paddle(width-20,0,20,100)
+        self.player1 = Paddle(0,0,20,100,self)
+        self.player2 = Paddle(width-20,0,20,100,self)
         
-        self.ball = Ball(240,320,20,20)
+        self.ball = Ball(height/2,width/2,20,20,self)
         self.ball.setSpeed(random.random()*14-7, random.random()*14-7)
+
+        self.balls = []
 
     def handle_event(self, event):
         if event.type == pygame.QUIT:
             self._running = False
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            ball = Ball(self.screen.get_height(),self.screen.get_width(),20,100,self)
+            ball.setSpeed(random.random()*14-7, random.random()*14-7)
+            self.balls.append(ball)
             
     def update_game(self):
         keys_pressed = pygame.key.get_pressed()
@@ -38,17 +44,22 @@ class Pong:
             self.player1.moveUp()
         if keys_pressed[pygame.K_s]:
             self.player1.moveDown()
-        self.ball.update(self.screen, self.player1, self.player2)
+        self.ball.update()
+        for ball in self.balls:
+            ball.update()
     
     def render(self):
         background = pygame.Surface(self.screen.get_size()).convert()
         background.fill((250, 250, 250))
         self.screen.blit(background, (0,0))
 
-        self.player1.render(self.screen)
-        self.player2.render(self.screen)
+        self.player1.render()
+        self.player2.render()
         
-        self.ball.render(self.screen)
+        self.ball.render()
+
+        for ball in self.balls:
+            ball.render()
         
         pygame.display.flip()
     
