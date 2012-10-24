@@ -5,6 +5,7 @@ import pygame
 import random
 from ball import Ball
 from paddle import Paddle
+from scoreboard import Scoreboard
 
 class Pong:
     def __init__(self, width=640, height=480, title="Prog Workshop - Pong!"):
@@ -21,16 +22,18 @@ class Pong:
         self.player1 = Paddle(0,0,20,100,self)
         self.player2 = Paddle(width-20,0,20,100,self)
         
-        self.ball = Ball(height/2,width/2,20,20,self)
+        self.ball = Ball(width/2,height/2,20,20,self)
         self.ball.setSpeed(random.random()*14-7, random.random()*14-7)
 
         self.balls = []
+
+        self.score = Scoreboard(36,0,0,self)
 
     def handle_event(self, event):
         if event.type == pygame.QUIT:
             self._running = False
         if event.type == pygame.MOUSEBUTTONDOWN:
-            ball = Ball(self.screen.get_height(),self.screen.get_width(),20,100,self)
+            ball = Ball(self.screen.get_width()/2,self.screen.get_height()/2,20,20,self)
             ball.setSpeed(random.random()*14-7, random.random()*14-7)
             self.balls.append(ball)
             
@@ -60,6 +63,8 @@ class Pong:
 
         for ball in self.balls:
             ball.render()
+
+        self.score.renderScore()
         
         pygame.display.flip()
     

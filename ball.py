@@ -16,10 +16,15 @@ class Ball(pygame.Rect):
         if self.colliderect(self.game.player1) or self.colliderect(self.game.player2):
             self.speed[0] = -self.speed[0]*1.2
         elif self.left < 0 or self.right > self.game.screen.get_width():
+            if self.left < 0:
+                self.game.score.incrementScoreFor("p2")
+            else:
+                self.game.score.incrementScoreFor("p1")
+            
             self.top = self.game.screen.get_height()/2
             self.left = self.game.screen.get_width()/2
-            self.setSpeed((random.random()+1)*7-5, (random.random()+1)*7-5)
-            
+            self.setSpeed(random.random()*14-7, random.random()*14-7)
+                        
         if self.top < 0 or self.bottom > self.game.screen.get_height():
             self.speed[1] = -self.speed[1]
         
