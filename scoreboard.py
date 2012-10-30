@@ -1,7 +1,7 @@
 import pygame
 
 class Scoreboard(pygame.font.Font):
-    def __init__(self, size, p1score, p2score, game):
+    def __init__(self, size, p1score=0, p2score=0, game):
             super(Scoreboard, self).__init__(None, size)
             self.p1score = p1score
             self.p2score = p2score
@@ -13,7 +13,6 @@ class Scoreboard(pygame.font.Font):
         self.game.screen.blit(text, textpos)
 
     def incrementScoreFor(self, player):
-        if player == "p1":
-            self.p1score += 1
-        if player == "p2":
-            self.p2score += 1
+        """Given information about who scored,
+            we should update our record of their
+            score appropriately."""

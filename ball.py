@@ -32,20 +32,10 @@ class Ball(pygame.Rect):
             self.top <= self.game.player2.bottom):
             self.speed[0] *= -1.2
             self.right = self.game.player2.left
-        # Ball is out of bounds
-        elif self.left < 0 or self.right > self.game.screen.get_width():
-            if self.left < 0:
-                self.game.score.incrementScoreFor("p2")
-            else:
-                self.game.score.incrementScoreFor("p1")
-
-            # Reset the ball in the center
-            self.top = self.game.screen.get_height()/2
-            self.left = self.game.screen.get_width()/2
-            self.setSpeed(random.random()*14-7, random.random()*14-7)
-
-            # Give the players a break!
-            self.waitFor = 20
+        """The above case handles if we are blocked, but that may not always be the case.
+            We also need to account for scoring against a player.
+            A ball should check its position and if it has gone offscreen, it should
+            let the scoreboard know who scored and then respawn itself to continue the game."""
                         
         # Ball hit the top border
         if self.top <= 0:
