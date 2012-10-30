@@ -13,7 +13,6 @@ class Scoreboard(pygame.font.Font):
         self.game.screen.blit(text, textpos)
 
     def incrementScoreFor(self, player):
-        if player == "p1":
-            self.p1score += 1
-        if player == "p2":
-            self.p2score += 1
+        """Given information about who scored,
+            we should update our record of their
+            score appropriately."""
