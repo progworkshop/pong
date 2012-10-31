@@ -32,7 +32,7 @@ class Ball(pygame.Rect):
             self.top <= self.game.player2.bottom):
             self.speed[0] *= -1.2
             self.right = self.game.player2.left
-        """The above case handles if we are blocked, but that may not always be the case.
+        """The above case handles if the ball hits the paddle, but that may not always be the case.
             We also need to account for scoring against a player.
             A ball should check its position and if it has gone offscreen, it should
             let the scoreboard know who scored and then respawn itself to continue the game."""
