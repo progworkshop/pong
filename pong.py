@@ -27,7 +27,7 @@ class Pong:
 
         self.balls = []
 
-        self.score = Scoreboard(36,0,0,self)
+        self.score = Scoreboard(self, 36)
 
     def handle_event(self, event):
         if event.type == pygame.QUIT:

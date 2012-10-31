@@ -1,7 +1,7 @@
 import pygame
 
 class Scoreboard(pygame.font.Font):
-    def __init__(self, size, p1score=0, p2score=0, game):
+    def __init__(self, game, size, p1score=0, p2score=0):
             super(Scoreboard, self).__init__(None, size)
             self.p1score = p1score
             self.p2score = p2score
